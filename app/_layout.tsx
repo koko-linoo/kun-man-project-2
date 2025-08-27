@@ -3,15 +3,31 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Toast from "react-native-toast-message";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="purchase-list" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="purchase-list"
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="milling-list"
           options={{ title: "ဆန်ကြိတ် စာရင်း", headerShown: true }}
@@ -25,6 +41,12 @@ export default function RootLayout() {
           options={{ title: "လက်ကျန် စာရင်း", headerShown: true }}
         />
         <Stack.Screen name="employee-list" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="settings"
+          options={{ headerShown: true, title: "Settings" }}
+        />
+        <Stack.Screen name="sapa-list" options={{ headerShown: false }} />
+        <Stack.Screen name="san-list" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
       <Toast />

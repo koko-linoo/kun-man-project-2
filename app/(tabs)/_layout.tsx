@@ -1,5 +1,7 @@
+import { IconButton } from "@/components/Button";
+import { theme } from "@/config/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
@@ -7,14 +9,19 @@ export default function TabLayout() {
     <Tabs
       initialRouteName="index"
       screenOptions={{
-        tabBarActiveTintColor: "tomato",
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarStyle: { backgroundColor: "white", height: 70 },
+        headerRight: () => (
+          <IconButton onPress={() => router.push("/settings")}>
+            <Ionicons name="settings" size={24} />
+          </IconButton>
+        ),
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "မူလစာမက်နှာ",
-          tabBarLabelPosition: "beside-icon",
+          title: "မူလစာမျက်နှာ",
           tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={16} color={color} />
           ),
@@ -24,7 +31,6 @@ export default function TabLayout() {
         name="history"
         options={{
           title: "History",
-          tabBarLabelPosition: "beside-icon",
           tabBarIcon: ({ color }) => (
             <Ionicons name="time" size={16} color={color} />
           ),

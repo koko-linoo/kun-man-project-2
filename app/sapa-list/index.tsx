@@ -1,14 +1,26 @@
 import { IconButton } from "@/components/Button";
 import { BottomButton } from "@/components/Container";
 import { theme } from "@/config/theme";
-import { useEmployeeList } from "@/quries/employee.query";
+import { useDeleteSapa, useSapaList } from "@/quries/sapa.query";
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
+function DeleteSapa({ id }: { id: number }) {
+  const { mutate, isPending } = useDeleteSapa();
+
+  if (isPending) return <ActivityIndicator style={{ marginRight: 16 }} />;
+
+  return (
+    <IconButton onPress={() => mutate(id)}>
+      <Ionicons name="trash" size={24} color="orange" />
+    </IconButton>
+  );
+}
+
 export default function EmployeeList() {
-  const { data, isLoading, refetch } = useEmployeeList();
+  const { data, isLoading, refetch } = useSapaList();
 
   return (
     <>
@@ -22,32 +34,22 @@ export default function EmployeeList() {
         }}
       />
       <BottomButton
-        label="အလုပ်သမား စာရင်း အသစ်ထည့်ရန်"
-        onPress={() => router.push("/employee-list/add-new")}
+        label="စပါးအမျိုးအစား အသစ်ထည့်ရန်"
+        onPress={() => router.push("/sapa-list/add-new")}
       >
         <ScrollView style={styles.scrollView}>
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
             <View style={styles.container}>
-              {data?.data?.map((employee) => (
-                <View key={employee.id} style={styles.item}>
-                  <View style={styles.avator}>
-                    <Ionicons
-                      name="person-circle"
-                      size={80}
-                      color={theme.colors.secondary}
-                    />
-                  </View>
+              {data?.data?.map((sapa) => (
+                <View key={sapa.id} style={styles.item}>
                   <Text
-                    style={{ fontWeight: 700, fontSize: theme.fontSizes.xl }}
+                    style={{ fontWeight: 700, fontSize: theme.fontSizes.md }}
                   >
-                    {employee.name}
+                    {sapa.name}
                   </Text>
-                  <Text>{employee.fee}</Text>
-                  <Text>
-                    {new Date(employee.created_at).toLocaleDateString()}
-                  </Text>
+                  <DeleteSapa id={sapa.id} />
                 </View>
               ))}
             </View>
@@ -63,9 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
-    gap: theme.spacing.sm,
     padding: theme.spacing.md,
-    flexDirection: "row",
     backgroundColor: "white",
     borderRadius: theme.spacing.sm,
     shadowColor: "#ccc",
@@ -74,15 +74,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 6,
     margin: 2,
-  },
-  avator: {
+    justifyContent: "space-between",
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: theme.colors.background,
-    padding: theme.spacing.sm,
-    borderRadius: 30,
-    width: 60,
-    height: 60,
   },
   container: {
     padding: theme.spacing.sm - 2,

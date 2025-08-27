@@ -7,4 +7,14 @@ declare global {
     name: string;
     fee: number;
   }
+
+  interface Sapa {
+    id: number;
+    name: string;
+  }
+
+  interface San {
+    id: number;
+    name: string;
+  }
 }

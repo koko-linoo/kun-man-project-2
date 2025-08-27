@@ -1,3 +1,4 @@
+import { theme } from "@/config/theme";
 import { router } from "expo-router";
 import {
   StyleSheet,
@@ -5,6 +6,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
   View,
+  ViewProps,
 } from "react-native";
 
 type ButtonProps = {
@@ -12,10 +14,15 @@ type ButtonProps = {
   route: any;
 };
 
-export function Button({ label, route }: ButtonProps) {
+export function Button({
+  label,
+  route,
+  style,
+  ...props
+}: ButtonProps & ViewProps) {
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => router.push(route)}>
-      <View style={styles.button}>
+      <View style={[styles.button, style]} {...props}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </View>
     </TouchableOpacity>
@@ -35,7 +42,20 @@ export function Button2({
   );
 }
 
+export function IconButton(props: TouchableOpacityProps) {
+  return (
+    <TouchableOpacity
+      activeOpacity={0.6}
+      {...props}
+      style={styles.iconButton}
+    />
+  );
+}
+
 const styles = StyleSheet.create({
+  iconButton: {
+    paddingHorizontal: 16,
+  },
   buttonLabel: {
     fontWeight: "bold",
     color: "white",
@@ -43,12 +63,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    display: "flex",
-    alignItems: "center",
+    height: 50,
+    backgroundColor: theme.colors.primary,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 6,
+    borderRadius: theme.spacing.sm,
+    padding: 8,
     justifyContent: "center",
-    width: "100%",
-    backgroundColor: "tomato",
-    borderRadius: 10,
-    padding: 10,
+    alignItems: "center",
   },
 });

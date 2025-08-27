@@ -1,3 +1,4 @@
+import { theme } from "@/config/theme";
 import { StyleSheet, View, ViewProps } from "react-native";
 import { Button2 } from "./Button";
 
@@ -28,11 +29,19 @@ export function BottomButton({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 8,
-    padding: 16,
   },
   content: {
     flex: 1,
+    padding: 8,
+    gap: 8,
   },
-  bottom: {},
+  bottom: {
+    paddingHorizontal: theme.spacing.md,
+    paddingTop: theme.spacing.md,
+    paddingBottom: theme.spacing.xl,
+    backgroundColor: "white",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.9,
+    shadowRadius: 5,
+  },
 });

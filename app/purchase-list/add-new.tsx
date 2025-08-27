@@ -20,8 +20,9 @@ export default function AddNew() {
     >
       <View style={styles.container}>
         <View>
-          <Text>အလုပ်သမား အမည်</Text>
+          <Text>အမည်</Text>
           <TextInput
+            placeholderTextColor="#ccc"
             value={name}
             onChange={(e) => setName(e.nativeEvent.text)}
             id="name"
@@ -30,14 +31,15 @@ export default function AddNew() {
           />
         </View>
         <View>
-          <Text>လုပ်အားခ</Text>
+          <Text>ဆန်အမျိုးအစား</Text>
           <TextInput
+            placeholderTextColor="#ccc"
             id="fee"
             value={fee}
             onChange={(e) => setFee(e.nativeEvent.text)}
             keyboardType="number-pad"
             style={styles.input}
-            placeholder="လုပ်အားခ ထည့်သွင်းရန်"
+            placeholder="ဆန်အမျိုးအစား ထည့်သွင်းရန်"
           />
         </View>
       </View>
