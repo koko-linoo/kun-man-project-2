@@ -1,4 +1,6 @@
 import { BottomButton } from "@/components/Container";
+import { SapaSelect } from "@/components/selects/SapaSelect";
+import { theme } from "@/config/theme";
 import { useCreateEmployee } from "@/quries/employee.query";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -6,7 +8,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function AddNew() {
   const [name, setName] = useState("");
-  const [fee, setFee] = useState("");
+  const [amount, setAmount] = useState("");
 
   const { isPending, mutateAsync } = useCreateEmployee();
 
@@ -15,31 +17,51 @@ export default function AddNew() {
       disabled={isPending}
       label="သိမ်းဆည်းမည်"
       onPress={() => {
-        mutateAsync({ name, fee: Number(fee) }).then(() => router.back());
+        mutateAsync({ name }).then(() => router.back());
       }}
     >
       <View style={styles.container}>
         <View>
           <Text>အမည်</Text>
           <TextInput
-            placeholderTextColor="#ccc"
+            placeholderTextColor="#aaa"
             value={name}
             onChange={(e) => setName(e.nativeEvent.text)}
-            id="name"
             style={styles.input}
             placeholder="အမည် ထည့်သွင်းရန်"
           />
         </View>
+        <SapaSelect />
+        <View style={styles.row}>
+          <View>
+            <Text>တင်း</Text>
+            <TextInput
+              placeholderTextColor="#aaa"
+              value={amount}
+              onChange={(e) => setAmount(e.nativeEvent.text)}
+              style={styles.input}
+              placeholder="000, 000"
+            />
+          </View>
+          <View>
+            <Text>ပေါင်</Text>
+            <TextInput
+              placeholderTextColor="#aaa"
+              value={amount}
+              onChange={(e) => setAmount(e.nativeEvent.text)}
+              style={styles.input}
+              placeholder="000, 000"
+            />
+          </View>
+        </View>
         <View>
-          <Text>ဆန်အမျိုးအစား</Text>
+          <Text>တန်ဖိုး</Text>
           <TextInput
-            placeholderTextColor="#ccc"
-            id="fee"
-            value={fee}
-            onChange={(e) => setFee(e.nativeEvent.text)}
-            keyboardType="number-pad"
+            placeholderTextColor="#aaa"
+            value={amount}
+            onChange={(e) => setAmount(e.nativeEvent.text)}
             style={styles.input}
-            placeholder="ဆန်အမျိုးအစား ထည့်သွင်းရန်"
+            placeholder="000, 000"
           />
         </View>
       </View>
@@ -50,13 +72,18 @@ export default function AddNew() {
 const styles = StyleSheet.create({
   container: {
     gap: 18,
+    padding: theme.spacing.md,
   },
   input: {
     borderRadius: 10,
-    fontSize: 14,
+    fontSize: 12,
     borderWidth: 1,
     borderColor: "gray",
     padding: 15,
     width: "100%",
+  },
+  row: {
+    flexDirection: "row",
+    gap: theme.spacing.md,
   },
 });

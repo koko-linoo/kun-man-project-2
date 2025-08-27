@@ -32,22 +32,11 @@ export default function EmployeeList() {
             <View style={styles.container}>
               {data?.data?.map((employee) => (
                 <View key={employee.id} style={styles.item}>
-                  <View style={styles.avator}>
-                    <Ionicons
-                      name="person-circle"
-                      size={80}
-                      color={theme.colors.secondary}
-                    />
-                  </View>
-                  <Text
-                    style={{ fontWeight: 700, fontSize: theme.fontSizes.xl }}
-                  >
-                    {employee.name}
-                  </Text>
-                  <Text>{employee.fee}</Text>
                   <Text>
                     {new Date(employee.created_at).toLocaleDateString()}
                   </Text>
+                  <Text>{employee.name}</Text>
+                  <Text>{employee.fee}</Text>
                 </View>
               ))}
             </View>
@@ -61,8 +50,10 @@ export default function EmployeeList() {
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
+    padding: theme.spacing.md,
   },
   item: {
+    alignItems: "center",
     gap: theme.spacing.sm,
     padding: theme.spacing.md,
     flexDirection: "row",
@@ -85,7 +76,6 @@ const styles = StyleSheet.create({
     height: 60,
   },
   container: {
-    padding: theme.spacing.sm - 2,
     gap: theme.spacing.md - 2,
     flex: 1,
   },

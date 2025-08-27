@@ -1,4 +1,5 @@
 import { BottomButton } from "@/components/Container";
+import { theme } from "@/config/theme";
 import { useCreateEmployee } from "@/quries/employee.query";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -50,6 +51,7 @@ export default function AddNew() {
 const styles = StyleSheet.create({
   container: {
     gap: 18,
+    padding: theme.spacing.md,
   },
   input: {
     borderRadius: 10,
