@@ -1,0 +1,43 @@
+import { supabase } from "@/config/supabase";
+
+export async function getPurchaseList() {
+  const { data } = await supabase
+    .from("purchase_list")
+    .select<"*", Purchase>("*")
+    .order("created_at", { ascending: false });
+
+  const total = data?.map((item) => item.amount).reduce((a, b) => a + b, 0);
+
+  return {
+    data,
+    total,
+  };
+}
+
+export async function createPurchase(purchase: Record<string, any>) {
+  if (!purchase.name || !purchase.amount || !purchase.tin || !purchase.paung) {
+    return Promise.reject({
+      message: "အမည်ထည့်သွင်းရန်လိုအပ်ပါသည်။",
+    });
+  }
+
+  const result = await supabase.from("purchase_list").insert({
+    name: purchase.name,
+    amount: purchase.amount,
+    tin: purchase.tin,
+    paung: purchase.paung,
+    sapa_type: purchase.sapa,
+  });
+
+  if (result.error) {
+    return Promise.reject({
+      message: "Name already exists",
+    });
+  }
+
+  return result;
+}
+
+export function deletePurchase(id: number) {
+  return supabase.from("purchase_list").delete().eq("id", id);
+}

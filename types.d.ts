@@ -17,4 +17,14 @@ declare global {
     id: number;
     name: string;
   }
+
+  interface Purchase {
+    id: number;
+    created_at: string;
+    name: string;
+    amount: number;
+    tin: number;
+    paung: number;
+    sapa_type: Sapa;
+  }
 }

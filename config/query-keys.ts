@@ -11,3 +11,10 @@ export const sapaKeys = {
     return ["sapa-list", query];
   },
 };
+
+export const purchaseKeys = {
+  all: ["purchase-list"],
+  list: (query?: object) => {
+    return ["purchase-list", query];
+  },
+};

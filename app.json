@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/splash.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.linoo.kunmanproject2"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7e7402c0-3146-4ccf-8897-64a627248dfe"
+      }
     }
   }
 }

@@ -1,69 +1,64 @@
 import { BottomButton } from "@/components/Container";
+import { Input } from "@/components/Input";
 import { SapaSelect } from "@/components/selects/SapaSelect";
 import { theme } from "@/config/theme";
-import { useCreateEmployee } from "@/quries/employee.query";
+import { useCreatePurchase } from "@/quries/purchase.query";
 import { router } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function AddNew() {
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [name, setName] = useState<string | undefined>("");
+  const [sapa, setSapa] = useState<Sapa>();
+  const [tin, setTin] = useState<string | undefined>("");
+  const [paung, setPaung] = useState<string | undefined>("");
+  const [amount, setAmount] = useState<string | undefined>("");
 
-  const { isPending, mutateAsync } = useCreateEmployee();
+  const { isPending, mutateAsync } = useCreatePurchase();
 
   return (
     <BottomButton
       disabled={isPending}
       label="သိမ်းဆည်းမည်"
       onPress={() => {
-        mutateAsync({ name }).then(() => router.back());
+        mutateAsync({ name, tin, paung, sapa: sapa?.id, amount }).then(() =>
+          router.back()
+        );
       }}
     >
       <View style={styles.container}>
-        <View>
-          <Text>အမည်</Text>
-          <TextInput
-            placeholderTextColor="#aaa"
-            value={name}
-            onChange={(e) => setName(e.nativeEvent.text)}
-            style={styles.input}
-            placeholder="အမည် ထည့်သွင်းရန်"
-          />
-        </View>
-        <SapaSelect />
+        <Input
+          placeholder="000, 000"
+          label="အမည်"
+          value={name}
+          onChange={(e) => setName(e)}
+        />
+        <SapaSelect
+          value={sapa}
+          onChange={(e) => setSapa({ id: Number(e.id), name: e.name })}
+        />
         <View style={styles.row}>
-          <View>
-            <Text>တင်း</Text>
-            <TextInput
-              placeholderTextColor="#aaa"
-              value={amount}
-              onChange={(e) => setAmount(e.nativeEvent.text)}
-              style={styles.input}
-              placeholder="000, 000"
-            />
-          </View>
-          <View>
-            <Text>ပေါင်</Text>
-            <TextInput
-              placeholderTextColor="#aaa"
-              value={amount}
-              onChange={(e) => setAmount(e.nativeEvent.text)}
-              style={styles.input}
-              placeholder="000, 000"
-            />
-          </View>
-        </View>
-        <View>
-          <Text>တန်ဖိုး</Text>
-          <TextInput
-            placeholderTextColor="#aaa"
-            value={amount}
-            onChange={(e) => setAmount(e.nativeEvent.text)}
+          <Input
             style={styles.input}
             placeholder="000, 000"
+            label="တင်း"
+            value={tin}
+            onChange={(e) => setTin(e)}
+          />
+          <Input
+            style={styles.input}
+            placeholder="000, 000"
+            label="ပေါင်"
+            value={paung}
+            onChange={(e) => setPaung(e)}
           />
         </View>
+        <Input
+          label="တန်ဖိုး"
+          placeholder="000, 000"
+          value={amount}
+          onChange={(e) => setAmount(e)}
+        />
       </View>
     </BottomButton>
   );
@@ -71,16 +66,11 @@ export default function AddNew() {
 
 const styles = StyleSheet.create({
   container: {
-    gap: 18,
+    gap: theme.spacing.md,
     padding: theme.spacing.md,
   },
   input: {
-    borderRadius: 10,
-    fontSize: 12,
-    borderWidth: 1,
-    borderColor: "gray",
-    padding: 15,
-    width: "100%",
+    flex: 1,
   },
   row: {
     flexDirection: "row",

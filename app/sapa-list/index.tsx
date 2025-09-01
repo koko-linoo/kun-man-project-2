@@ -1,62 +1,39 @@
-import { IconButton } from "@/components/Button";
-import { BottomButton } from "@/components/Container";
+import { BottomButtonList } from "@/components/Container";
 import { theme } from "@/config/theme";
 import { useDeleteSapa, useSapaList } from "@/quries/sapa.query";
-import { Ionicons } from "@expo/vector-icons";
-import { router, Stack } from "expo-router";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { router } from "expo-router";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-function DeleteSapa({ id }: { id: number }) {
+function Item({ sapa }: { sapa: Sapa }) {
   const { mutate, isPending } = useDeleteSapa();
 
-  if (isPending) return <ActivityIndicator style={{ marginRight: 16 }} />;
-
   return (
-    <IconButton onPress={() => mutate(id)}>
-      <Ionicons name="trash" size={24} color="orange" />
-    </IconButton>
+    <TouchableOpacity onLongPress={() => mutate(sapa.id)} disabled={isPending}>
+      <View style={styles.item}>
+        <Text>{sapa.name}</Text>
+        {isPending && <ActivityIndicator style={{ marginRight: 16 }} />}
+      </View>
+    </TouchableOpacity>
   );
 }
 
 export default function EmployeeList() {
-  const { data, isLoading, refetch } = useSapaList();
+  const { data, isLoading } = useSapaList();
 
   return (
-    <>
-      <Stack.Screen
-        options={{
-          headerRight: () => (
-            <IconButton onPress={() => refetch()}>
-              <Ionicons name="reload" size={24} color="#ccc" />
-            </IconButton>
-          ),
-        }}
-      />
-      <BottomButton
-        label="စပါးအမျိုးအစား အသစ်ထည့်ရန်"
-        onPress={() => router.push("/sapa-list/add-new")}
-      >
-        <ScrollView style={styles.scrollView}>
-          {isLoading ? (
-            <Text>Loading...</Text>
-          ) : (
-            <View style={styles.container}>
-              {data?.data?.map((sapa) => (
-                <View key={sapa.id} style={styles.item}>
-                  <Text
-                    style={{ fontWeight: 700, fontSize: theme.fontSizes.md }}
-                  >
-                    {sapa.name}
-                  </Text>
-                  <DeleteSapa id={sapa.id} />
-                </View>
-              ))}
-            </View>
-          )}
-        </ScrollView>
-      </BottomButton>
-    </>
+    <BottomButtonList
+      items={data?.data || []}
+      child={(item) => <Item key={item.id} sapa={item} />}
+      isLoading={isLoading}
+      label="စပါးအမျိုးအစား အသစ်ထည့်ရန်"
+      onPress={() => router.push("/sapa-list/add-new")}
+    />
   );
 }
 
@@ -79,8 +56,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    padding: theme.spacing.sm - 2,
-    gap: theme.spacing.md - 2,
+    padding: theme.spacing.md,
+    gap: theme.spacing.sm,
     flex: 1,
   },
 });
