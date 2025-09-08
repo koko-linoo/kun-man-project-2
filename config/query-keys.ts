@@ -12,9 +12,30 @@ export const sapaKeys = {
   },
 };
 
+export const sanKeys = {
+  all: ["san-list"],
+  list: (query?: object) => {
+    return ["san-list", query];
+  },
+};
+
 export const purchaseKeys = {
   all: ["purchase-list"],
   list: (query?: object) => {
     return ["purchase-list", query];
+  },
+};
+
+export const millingKeys = {
+  all: ["milling-list"],
+  list: (query?: object) => {
+    return ["milling-list", query];
+  },
+};
+
+export const saleKeys = {
+  all: ["sale-list"],
+  list: (query?: object) => {
+    return ["sale-list", query];
   },
 };

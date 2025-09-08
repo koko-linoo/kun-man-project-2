@@ -1,10 +1,10 @@
 import { BottomButtonList } from "@/components/Container";
 import { ListItem } from "@/components/ListItem";
-import { useDeletePurchase, usePurchaseList } from "@/quries/purchase.query";
+import { useDeleteSale, useSaleList } from "@/quries/sale.query";
 import { router } from "expo-router";
 
-function Item({ data }: { data: Purchase }) {
-  const { mutate, isPending } = useDeletePurchase();
+function Item({ data }: { data: Sale }) {
+  const { mutate, isPending } = useDeleteSale();
 
   return (
     <ListItem
@@ -12,9 +12,8 @@ function Item({ data }: { data: Purchase }) {
       data={{
         ရက်စွဲ: new Date(data.created_at).toLocaleDateString(),
         အမည်: data.name,
-        "စပါး အမျိုးအစား": data.sapa_type?.name,
-        "အလေးချိန် (တင်း)": data.tin,
-        "အလေးချိန် (ပေါင်)": data.paung,
+        "ဆန် အမျိုးအစား": data.san_type?.name,
+        "အိတ် အရေအတွက်": data.count + " အိတ်",
         တန်ဖိုး: `${data.amount?.toLocaleString()} ကျပ်`,
       }}
       onLongPress={() => mutate(data.id)}
@@ -22,8 +21,8 @@ function Item({ data }: { data: Purchase }) {
   );
 }
 
-export default function PurchaseList() {
-  const { data, isLoading } = usePurchaseList();
+export default function SaleList() {
+  const { data, isLoading } = useSaleList();
 
   return (
     <BottomButtonList
@@ -31,7 +30,7 @@ export default function PurchaseList() {
       child={(item) => <Item key={item.id} data={item} />}
       isLoading={isLoading}
       label="အဝယ် စာရင်း အသစ်ထည့်ရန်"
-      onPress={() => router.push("/purchase-list/add-new")}
+      onPress={() => router.push("/sale-list/add-new")}
     />
   );
 }

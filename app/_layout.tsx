@@ -32,11 +32,7 @@ export default function RootLayout() {
           />
           <Stack.Screen
             name="milling-list"
-            options={{ title: "ဆန်ကြိတ် စာရင်း", headerShown: true }}
-          />
-          <Stack.Screen
-            name="sale-list"
-            options={{ title: "ဆန်ရောင်း စာရင်း", headerShown: true }}
+            options={{ title: "ဆန်ကြိတ် စာရင်း", headerShown: false }}
           />
           <Stack.Screen
             name="remaining-list"
@@ -48,6 +44,8 @@ export default function RootLayout() {
             options={{ headerShown: true, title: "Settings" }}
           />
           <Stack.Screen name="sapa-list" options={{ headerShown: false }} />
+          <Stack.Screen name="san-list" options={{ headerShown: false }} />
+          <Stack.Screen name="sale-list" options={{ headerShown: false }} />
         </Stack>
         <StatusBar style="auto" />
         <Toast />

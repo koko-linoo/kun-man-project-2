@@ -27,7 +27,7 @@ export default function Settings() {
         <TouchableOpacity
           activeOpacity={0.6}
           style={styles.gridItem}
-          onPress={() => router.push("/sapa-list")}
+          onPress={() => router.push("/san-list")}
         >
           <View style={styles.button}>
             <Ionicons name="receipt" size={24} color="white" />

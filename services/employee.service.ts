@@ -32,3 +32,7 @@ export function createEmployee(employee: Record<string, any>) {
     fee: employee.fee,
   });
 }
+
+export function deleteEmployee(id: number) {
+  return supabase.from("employee_fees").delete().eq("id", id);
+}

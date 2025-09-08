@@ -1,27 +1,26 @@
 import { BottomButton } from "@/components/Container";
 import { Input } from "@/components/Input";
-import { SapaSelect } from "@/components/selects/Select";
+import { SanSelect } from "@/components/selects/Select";
 import { theme } from "@/config/theme";
-import { useCreatePurchase } from "@/quries/purchase.query";
+import { useCreateSale } from "@/quries/sale.query";
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function AddNew() {
   const [name, setName] = useState<string | undefined>("");
-  const [sapa, setSapa] = useState<Sapa>();
-  const [tin, setTin] = useState<string | undefined>("");
-  const [paung, setPaung] = useState<string | undefined>("");
+  const [san, setSan] = useState<San>();
+  const [count, setCount] = useState<string | undefined>("");
   const [amount, setAmount] = useState<string | undefined>("");
 
-  const { isPending, mutateAsync } = useCreatePurchase();
+  const { isPending, mutateAsync } = useCreateSale();
 
   return (
     <BottomButton
       disabled={isPending}
       label="သိမ်းဆည်းမည်"
       onPress={() => {
-        mutateAsync({ name, tin, paung, sapa: sapa?.id, amount }).then(() =>
+        mutateAsync({ name, count, san_type: san?.id, amount }).then(() =>
           router.back()
         );
       }}
@@ -33,26 +32,17 @@ export default function AddNew() {
           value={name}
           onChange={(e) => setName(e)}
         />
-        <SapaSelect
-          value={sapa}
-          onChange={(e) => setSapa({ id: Number(e.id), name: e.name })}
+        <SanSelect
+          value={san}
+          onChange={(e) => setSan({ id: Number(e.id), name: e.name })}
         />
-        <View style={styles.row}>
-          <Input
-            style={styles.input}
-            placeholder="000, 000"
-            label="တင်း"
-            value={tin}
-            onChange={(e) => setTin(e)}
-          />
-          <Input
-            style={styles.input}
-            placeholder="000, 000"
-            label="ပေါင်"
-            value={paung}
-            onChange={(e) => setPaung(e)}
-          />
-        </View>
+        <Input
+          style={styles.input}
+          placeholder="000, 000"
+          label="အိတ် အရေအတွက်"
+          value={count}
+          onChange={(e) => setCount(e)}
+        />
         <Input
           label="တန်ဖိုး"
           placeholder="000, 000"

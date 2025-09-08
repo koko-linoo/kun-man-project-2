@@ -27,4 +27,20 @@ declare global {
     paung: number;
     sapa_type: Sapa;
   }
+
+  interface Milling {
+    id: number;
+    created_at: string;
+    count: number;
+    san_type: San;
+  }
+
+  interface Sale {
+    id: number;
+    created_at: string;
+    name: string;
+    amount: number;
+    count: number;
+    san_type: San;
+  }
 }

@@ -3,7 +3,7 @@ import { supabase } from "@/config/supabase";
 export async function getPurchaseList() {
   const { data } = await supabase
     .from("purchase_list")
-    .select<"*", Purchase>("*")
+    .select("*, sapa_type(name)")
     .order("created_at", { ascending: false });
 
   const total = data?.map((item) => item.amount).reduce((a, b) => a + b, 0);
@@ -15,9 +15,21 @@ export async function getPurchaseList() {
 }
 
 export async function createPurchase(purchase: Record<string, any>) {
-  if (!purchase.name || !purchase.amount || !purchase.tin || !purchase.paung) {
+  if (!purchase.name) {
     return Promise.reject({
-      message: "အမည်ထည့်သွင်းရန်လိုအပ်ပါသည်။",
+      message: "အမည် ထည့်သွင်းပါ",
+    });
+  }
+
+  if (!purchase.amount) {
+    return Promise.reject({
+      message: "တန်ဖိုးထည့်သွင်းပါ",
+    });
+  }
+
+  if (!purchase.tin || !purchase.paung) {
+    return Promise.reject({
+      message: "တင်းနှင့် ပေါင် ထည့်သွင်းပါ",
     });
   }
 
@@ -31,7 +43,7 @@ export async function createPurchase(purchase: Record<string, any>) {
 
   if (result.error) {
     return Promise.reject({
-      message: "Name already exists",
+      message: "တခုခုမှားယွင်းနေပါသည်",
     });
   }
 

@@ -1,30 +1,26 @@
-import { employeeKeys } from "@/config/query-keys";
-import {
-  createEmployee,
-  deleteEmployee,
-  getEmployeeList,
-} from "@/services/employee.service";
+import { sanKeys } from "@/config/query-keys";
+import { createSan, deleteSan, getSanList } from "@/services/san.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
 
-export function useEmployeeList() {
+export function useSanList() {
   return useQuery({
-    queryKey: employeeKeys.all,
-    queryFn: async () => getEmployeeList(),
+    queryKey: sanKeys.all,
+    queryFn: async () => getSanList(),
     select: (response) => response,
   });
 }
 
-export function useCreateEmployee() {
+export function useCreateSan() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (employee: Record<string, any>) =>
-      createEmployee(employee),
+    mutationFn: async (San: Record<string, any>) => createSan(San),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: employeeKeys.all });
+      queryClient.invalidateQueries({ queryKey: sanKeys.all });
     },
     onError: (response) => {
+      console.log(response);
       Toast.show({
         type: "error",
         text1: "Error",
@@ -34,13 +30,13 @@ export function useCreateEmployee() {
   });
 }
 
-export function useDeleteEmployee() {
+export function useDeleteSan() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id: number) => deleteEmployee(id),
+    mutationFn: async (id: number) => deleteSan(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: employeeKeys.all });
+      queryClient.invalidateQueries({ queryKey: sanKeys.all });
     },
     onError: (response) => {
       Toast.show({

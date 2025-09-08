@@ -1,30 +1,30 @@
-import { employeeKeys } from "@/config/query-keys";
+import { millingKeys } from "@/config/query-keys";
 import {
-  createEmployee,
-  deleteEmployee,
-  getEmployeeList,
-} from "@/services/employee.service";
+  createMilling,
+  deleteMilling,
+  getMillingList,
+} from "@/services/milling.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
 
-export function useEmployeeList() {
+export function useMillingList() {
   return useQuery({
-    queryKey: employeeKeys.all,
-    queryFn: async () => getEmployeeList(),
+    queryKey: millingKeys.all,
+    queryFn: async () => getMillingList(),
     select: (response) => response,
   });
 }
 
-export function useCreateEmployee() {
+export function useCreateMilling() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (employee: Record<string, any>) =>
-      createEmployee(employee),
+    mutationFn: async (Milling: Record<string, any>) => createMilling(Milling),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: employeeKeys.all });
+      queryClient.invalidateQueries({ queryKey: millingKeys.all });
     },
     onError: (response) => {
+      console.log(response);
       Toast.show({
         type: "error",
         text1: "Error",
@@ -34,13 +34,13 @@ export function useCreateEmployee() {
   });
 }
 
-export function useDeleteEmployee() {
+export function useDeleteMilling() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id: number) => deleteEmployee(id),
+    mutationFn: async (id: number) => deleteMilling(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: employeeKeys.all });
+      queryClient.invalidateQueries({ queryKey: millingKeys.all });
     },
     onError: (response) => {
       Toast.show({

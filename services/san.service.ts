@@ -1,9 +1,9 @@
 import { supabase } from "@/config/supabase";
 
-export async function getSapaList() {
+export async function getSanList() {
   const { data } = await supabase
-    .from("sapa_type")
-    .select<"*", Sapa>("*")
+    .from("san_type")
+    .select<"*", San>("*")
     .order("created_at", { ascending: false });
 
   return {
@@ -11,15 +11,15 @@ export async function getSapaList() {
   };
 }
 
-export async function createSapa(sapa: Record<string, any>) {
-  if (!sapa.name) {
+export async function createSan(san: Record<string, any>) {
+  if (!san.name) {
     return Promise.reject({
       message: "အမည်ထည့်သွင်းရန်လိုအပ်ပါသည်။",
     });
   }
 
-  const result = await supabase.from("sapa_type").insert({
-    name: sapa.name,
+  const result = await supabase.from("san_type").insert({
+    name: san.name,
   });
 
   if (result.error) {
@@ -31,6 +31,6 @@ export async function createSapa(sapa: Record<string, any>) {
   return result;
 }
 
-export function deleteSapa(id: number) {
-  return supabase.from("sapa_type").delete().eq("id", id);
+export function deleteSan(id: number) {
+  return supabase.from("san_type").delete().eq("id", id);
 }
