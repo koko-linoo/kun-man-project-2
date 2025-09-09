@@ -32,5 +32,11 @@ export async function createSan(san: Record<string, any>) {
 }
 
 export function deleteSan(id: number) {
+  if (id < 5) {
+    return Promise.reject({
+      message: "ဤဆန်အမျိုးအစားကို ဖျက်၍မရပါ။",
+    });
+  }
+
   return supabase.from("san_type").delete().eq("id", id);
 }

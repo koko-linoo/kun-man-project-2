@@ -1,5 +1,6 @@
 import { theme } from "@/config/theme";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Text } from "./Text";
 
 export function ListItem({
   disabled,
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
+    gap: theme.spacing.md,
     padding: theme.spacing.md,
     backgroundColor: "white",
     borderRadius: theme.spacing.sm,
@@ -56,6 +58,6 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: theme.fontSizes.lg,
-    fontWeight: 700,
+    fontFamily: "Font-Bold",
   },
 });

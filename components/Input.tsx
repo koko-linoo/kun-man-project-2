@@ -14,7 +14,7 @@ type InputProps = {
   label: string;
   placeholder?: string;
   value?: string;
-  onChange: (value: string | undefined) => void;
+  onChange?: (value: string | undefined) => void;
 };
 
 export function Input(props: InputProps) {
@@ -25,7 +25,7 @@ export function Input(props: InputProps) {
         readOnly={props.readonly}
         placeholderTextColor="#aaa"
         value={props.value}
-        onChange={(e) => props.onChange(e.nativeEvent.text)}
+        onChange={(e) => props.onChange?.(e.nativeEvent.text)}
         style={styles.input}
         placeholder={props.placeholder}
       />

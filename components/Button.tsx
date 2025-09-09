@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   buttonLabel: {
-    fontWeight: "bold",
+    fontFamily: "Font-Bold",
+    fontSize: theme.fontSizes.md,
     color: "white",
     alignItems: "center",
     justifyContent: "center",

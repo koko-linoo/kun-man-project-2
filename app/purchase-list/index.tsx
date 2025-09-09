@@ -30,7 +30,7 @@ export default function PurchaseList() {
       items={data?.data || []}
       child={(item) => <Item key={item.id} data={item} />}
       isLoading={isLoading}
-      label="အဝယ် စာရင်း အသစ်ထည့်ရန်"
+      label="အဝယ်စာရင်း အသစ်ထည့်ရန်"
       onPress={() => router.push("/purchase-list/add-new")}
     />
   );

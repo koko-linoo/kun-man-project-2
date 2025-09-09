@@ -22,7 +22,11 @@ export function SapaSelect(props: SapaSelectProps) {
   );
 }
 
-export function SanSelect(props: SapaSelectProps) {
+export function SanSelect(
+  props: SapaSelectProps & {
+    showAll?: boolean;
+  }
+) {
   const { data, isPending } = useSanList();
 
   return (
@@ -31,7 +35,7 @@ export function SanSelect(props: SapaSelectProps) {
       value={props.value}
       onChange={props.onChange}
       loading={isPending}
-      items={data?.data ?? []}
+      items={data?.data?.filter((x) => x.id > 4) ?? []}
       label="ဆန်အမျိုးအစား"
     />
   );

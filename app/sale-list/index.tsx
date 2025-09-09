@@ -29,7 +29,7 @@ export default function SaleList() {
       items={data?.data || []}
       child={(item) => <Item key={item.id} data={item} />}
       isLoading={isLoading}
-      label="အဝယ် စာရင်း အသစ်ထည့်ရန်"
+      label="အရောင်းစာရင်း အသစ်ထည့်ရန်"
       onPress={() => router.push("/sale-list/add-new")}
     />
   );

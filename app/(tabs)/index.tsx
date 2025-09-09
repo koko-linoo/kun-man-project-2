@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.spacing.sm,
   },
   buttonLabel: {
+    fontFamily: "Font-Regular",
     color: "white",
     fontWeight: "bold",
     textAlign: "center",

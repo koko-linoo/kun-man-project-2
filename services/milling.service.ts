@@ -27,10 +27,39 @@ export async function createMilling(milling: Record<string, any>) {
     });
   }
 
-  const result = await supabase.from("milling_list").insert({
-    count: milling.count,
-    san_type: milling.san_type,
-  });
+  const temp = [
+    {
+      count: milling.count,
+      san_type: milling.san_type,
+    },
+  ];
+
+  if (milling.extra) {
+    temp.push({
+      count: milling.extra,
+      san_type: 1,
+    });
+  }
+  if (milling.half) {
+    temp.push({
+      count: milling.half,
+      san_type: 2,
+    });
+  }
+  if (milling.twoThreeFour) {
+    temp.push({
+      count: milling.twoThreeFour,
+      san_type: 3,
+    });
+  }
+  if (milling.flowerNu) {
+    temp.push({
+      count: milling.flowerNu,
+      san_type: 4,
+    });
+  }
+
+  const result = await supabase.from("milling_list").insert(temp).select();
 
   if (result.error) {
     return Promise.reject({

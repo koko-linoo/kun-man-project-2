@@ -43,7 +43,7 @@ export function SelectInput({
             <TextInput
               id="fee"
               readOnly
-              value={props.value?.name}
+              defaultValue={props.value?.name}
               placeholderTextColor="#aaa"
               keyboardType="number-pad"
               style={styles.input}
