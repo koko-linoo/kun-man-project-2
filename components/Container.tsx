@@ -42,6 +42,55 @@ type ButtonListProps<T> = BottomButtonProps & {
   isLoading?: boolean;
 };
 
+export function List<T extends { id: number }>({
+  items,
+  child,
+  isLoading,
+  ...props
+}: ViewProps & {
+  items: T[];
+  child: (item: T) => React.ReactNode;
+  isLoading?: boolean;
+}) {
+  if (isLoading) {
+    return (
+      <View
+        style={[
+          styles.scrollView,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
+  if (!items.length) {
+    return (
+      <View
+        style={[
+          styles.scrollView,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <Text>No Content</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.container} {...props}>
+      <ScrollView style={styles.scrollView}>
+        <View style={[styles.container, { gap: theme.spacing.md }]}>
+          {items.map((item) => (
+            <View key={item.id}>{child(item)}</View>
+          ))}
+        </View>
+      </ScrollView>
+    </View>
+  );
+}
+
 export function BottomButtonList<T extends { id: number }>({
   child,
   items,

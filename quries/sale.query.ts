@@ -1,4 +1,4 @@
-import { saleKeys } from "@/config/query-keys";
+import { remainingKeys, saleKeys } from "@/config/query-keys";
 import { createSale, deleteSale, getSaleList } from "@/services/sale.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
@@ -17,7 +17,13 @@ export function useCreateSale() {
   return useMutation({
     mutationFn: async (Sale: Record<string, any>) => createSale(Sale),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: saleKeys.all });
+      queryClient.invalidateQueries({
+        queryKey: saleKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: remainingKeys.all,
+      });
     },
     onError: (response) => {
       console.log(response);
@@ -37,6 +43,7 @@ export function useDeleteSale() {
     mutationFn: async (id: number) => deleteSale(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: saleKeys.all });
+      queryClient.invalidateQueries({ queryKey: remainingKeys.all });
     },
     onError: (response) => {
       Toast.show({

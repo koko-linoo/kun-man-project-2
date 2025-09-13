@@ -8,10 +8,7 @@ import Toast from "react-native-toast-message";
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-    },
+    queries: {},
   },
 });
 
@@ -20,8 +17,6 @@ export default function RootLayout() {
     "Font-Regular": require("../assets/fonts/Padauk-Regular.ttf"),
     "Font-Bold": require("../assets/fonts/Padauk-Bold.ttf"),
   });
-
-  if (!fontsLoaded) return null;
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -35,7 +30,10 @@ export default function RootLayout() {
           />
           <Stack.Screen name="purchase-list" options={{ headerShown: false }} />
           <Stack.Screen name="milling-list" options={{ headerShown: false }} />
-          <Stack.Screen name="remaining-list" options={{ headerShown: true }} />
+          <Stack.Screen
+            name="remaining-list"
+            options={{ headerShown: true, title: "လက်ကျန်စာရင်း" }}
+          />
           <Stack.Screen name="employee-list" options={{ headerShown: false }} />
           <Stack.Screen name="settings" options={{ headerShown: true }} />
           <Stack.Screen name="sapa-list" options={{ headerShown: false }} />

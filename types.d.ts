@@ -43,4 +43,12 @@ declare global {
     count: number;
     san_type: San;
   }
+
+  interface Remaining {
+    id: number;
+    name: string;
+    milling: number;
+    sale: number;
+    remaining: number;
+  }
 }

@@ -33,6 +33,7 @@ export default function AddNew() {
           onChange={(e) => setName(e)}
         />
         <SanSelect
+          showAll
           value={san}
           onChange={(e) => setSan({ id: Number(e.id), name: e.name })}
         />

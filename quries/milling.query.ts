@@ -1,4 +1,4 @@
-import { millingKeys } from "@/config/query-keys";
+import { millingKeys, remainingKeys } from "@/config/query-keys";
 import {
   createMilling,
   deleteMilling,
@@ -21,7 +21,13 @@ export function useCreateMilling() {
   return useMutation({
     mutationFn: async (Milling: Record<string, any>) => createMilling(Milling),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: millingKeys.all });
+      queryClient.invalidateQueries({
+        queryKey: millingKeys.all,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: remainingKeys.all,
+      });
     },
     onError: (response) => {
       console.log(response);
@@ -41,6 +47,7 @@ export function useDeleteMilling() {
     mutationFn: async (id: number) => deleteMilling(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: millingKeys.all });
+      queryClient.invalidateQueries({ queryKey: remainingKeys.all });
     },
     onError: (response) => {
       Toast.show({

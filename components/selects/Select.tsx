@@ -35,7 +35,14 @@ export function SanSelect(
       value={props.value}
       onChange={props.onChange}
       loading={isPending}
-      items={data?.data?.filter((x) => x.id > 4) ?? []}
+      items={
+        data?.data?.filter((x) => {
+          if (props.showAll) {
+            return true;
+          }
+          return x.id > 4;
+        }) ?? []
+      }
       label="ဆန်အမျိုးအစား"
     />
   );

@@ -39,3 +39,10 @@ export const saleKeys = {
     return ["sale-list", query];
   },
 };
+
+export const remainingKeys = {
+  all: ["remaining-list"],
+  list: (query?: object) => {
+    return [...remainingKeys.all, query];
+  },
+};
