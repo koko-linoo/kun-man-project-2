@@ -44,6 +44,13 @@ declare global {
     san_type: San;
   }
 
+  interface SaleTotal {
+    id: number;
+    name: string;
+    amount: number;
+    count: number;
+  }
+
   interface Remaining {
     id: number;
     name: string;

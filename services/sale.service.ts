@@ -14,6 +14,18 @@ export async function getSaleList() {
   };
 }
 
+export async function getTotalSale(): Promise<SaleTotal[]> {
+  let { data, error } = await supabase.rpc("gettotalsale");
+
+  if (error) {
+    return Promise.reject({
+      message: "တစ်ခုခု မှားယွင်းနေပါသည်",
+    });
+  }
+
+  return data;
+}
+
 export async function createSale(sale: Record<string, any>) {
   if (!sale.name || !sale.amount || !sale.count || !sale.san_type) {
     return Promise.reject({

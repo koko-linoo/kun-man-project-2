@@ -1,5 +1,10 @@
 import { remainingKeys, saleKeys } from "@/config/query-keys";
-import { createSale, deleteSale, getSaleList } from "@/services/sale.service";
+import {
+  createSale,
+  deleteSale,
+  getSaleList,
+  getTotalSale,
+} from "@/services/sale.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Toast from "react-native-toast-message";
 
@@ -7,6 +12,14 @@ export function useSaleList() {
   return useQuery({
     queryKey: saleKeys.all,
     queryFn: async () => getSaleList(),
+    select: (response) => response,
+  });
+}
+
+export function useGetTotalSale() {
+  return useQuery({
+    queryKey: saleKeys.all,
+    queryFn: async () => getTotalSale(),
     select: (response) => response,
   });
 }
