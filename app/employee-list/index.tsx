@@ -28,8 +28,7 @@ export default function EmployeeList() {
     <>
       <View
         style={{
-          marginHorizontal: theme.spacing.md,
-          marginTop: theme.spacing.md,
+          margin: theme.spacing.md,
         }}
       >
         <ListItem
