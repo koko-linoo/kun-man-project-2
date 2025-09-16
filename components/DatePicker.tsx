@@ -6,7 +6,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "./Text";
 
 export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | undefined>(new Date());
   const [show, setShow] = useState(false);
 
   const handleChange = (_: any, selectedDate?: Date) => {
@@ -28,7 +28,12 @@ export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
           style={styles.labelContainer}
         >
           <Text style={styles.label}>
-            {date?.toLocaleDateString() ?? "Filter By Date"}
+            {date?.toLocaleDateString("my-MM", {
+              localeMatcher: "best fit",
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            }) ?? "Filter By Date"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
