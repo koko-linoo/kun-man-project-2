@@ -40,6 +40,8 @@ type ButtonListProps<T> = BottomButtonProps & {
   items: T[];
   child: (item: T) => React.ReactNode;
   isLoading?: boolean;
+  extra?: React.ReactNode;
+  header?: React.ReactNode;
 };
 
 export function List<T extends { id: number }>({
@@ -54,12 +56,7 @@ export function List<T extends { id: number }>({
 }) {
   if (isLoading) {
     return (
-      <View
-        style={[
-          styles.scrollView,
-          { justifyContent: "center", alignItems: "center" },
-        ]}
-      >
+      <View style={styles.loader}>
         <ActivityIndicator />
       </View>
     );
@@ -67,12 +64,7 @@ export function List<T extends { id: number }>({
 
   if (!items.length) {
     return (
-      <View
-        style={[
-          styles.scrollView,
-          { justifyContent: "center", alignItems: "center" },
-        ]}
-      >
+      <View style={styles.loader}>
         <Text>No Content</Text>
       </View>
     );
@@ -80,7 +72,10 @@ export function List<T extends { id: number }>({
 
   return (
     <View style={styles.container} {...props}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={[styles.container, { gap: theme.spacing.md }]}>
           {items.map((item) => (
             <View key={item.id}>{child(item)}</View>
@@ -95,56 +90,43 @@ export function BottomButtonList<T extends { id: number }>({
   child,
   items,
   isLoading = false,
-  ...props
+  label,
+  onPress,
+  disabled = false,
+  extra,
+  header,
 }: ButtonListProps<T>) {
   return (
-    <BottomButton {...props}>
-      {isLoading && (
-        <View
-          style={[
-            styles.scrollView,
-            { justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <ActivityIndicator />
-        </View>
-      )}
-      {!isLoading && Boolean(!items.length) && (
-        <View
-          style={[
-            styles.scrollView,
-            { justifyContent: "center", alignItems: "center" },
-          ]}
-        >
-          <Text>No Content</Text>
-        </View>
-      )}
-      {Boolean(items.length) && (
-        <ScrollView style={styles.scrollView}>
-          <View style={[styles.container, { gap: theme.spacing.md }]}>
-            {items.map((item) => (
-              <View key={item.id}>{child(item)}</View>
-            ))}
-          </View>
-        </ScrollView>
-      )}
-    </BottomButton>
+    <View style={styles.content}>
+      {header}
+      <List items={items} child={child} isLoading={isLoading} />
+      <View style={styles.bottom}>
+        {extra}
+        <Button2 label={label} onPress={onPress} disabled={disabled} />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   scrollView: {
     flex: 1,
-    padding: theme.spacing.md,
+    paddingHorizontal: theme.spacing.md,
   },
   container: {
     flex: 1,
   },
   content: {
     flex: 1,
-    gap: 8,
+    gap: theme.spacing.md,
   },
   bottom: {
+    gap: theme.spacing.md,
     paddingHorizontal: theme.spacing.md,
     paddingTop: theme.spacing.md,
     paddingBottom: theme.spacing.xl,

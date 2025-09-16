@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     gap: theme.spacing.md,
     padding: theme.spacing.md,
     backgroundColor: "white",
-    borderRadius: theme.spacing.sm,
+    borderRadius: theme.spacing.md,
     shadowColor: "#ccc",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.25,

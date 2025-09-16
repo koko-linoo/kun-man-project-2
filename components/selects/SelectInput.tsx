@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   },
   selectedItem: { backgroundColor: "#D3D3A3" },
   item: {
+    alignItems: "center",
     flexDirection: "row",
     gap: theme.spacing.md,
     padding: theme.spacing.md,

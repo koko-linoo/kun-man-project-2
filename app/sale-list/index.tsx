@@ -1,7 +1,9 @@
 import { BottomButtonList } from "@/components/Container";
+import { DatePicker } from "@/components/DatePicker";
 import { ListItem } from "@/components/ListItem";
 import { useDeleteSale, useSaleList } from "@/quries/sale.query";
 import { router } from "expo-router";
+import { useState } from "react";
 
 function Item({ data }: { data: Sale }) {
   const { mutate, isPending } = useDeleteSale();
@@ -22,10 +24,13 @@ function Item({ data }: { data: Sale }) {
 }
 
 export default function SaleList() {
-  const { data, isLoading } = useSaleList();
+  const [date, setDate] = useState<Date | undefined>();
+
+  const { data, isLoading } = useSaleList({ date });
 
   return (
     <BottomButtonList
+      header={<DatePicker onChange={setDate} />}
       items={data?.data || []}
       child={(item) => <Item key={item.id} data={item} />}
       isLoading={isLoading}

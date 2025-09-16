@@ -38,7 +38,6 @@ export default function AddNew() {
           onChange={(e) => setSan({ id: Number(e.id), name: e.name })}
         />
         <Input
-          style={styles.input}
           placeholder="000, 000"
           label="အိတ် အရေအတွက်"
           value={count}

@@ -1,10 +1,15 @@
 import { supabase } from "@/config/supabase";
+import { getDayRange } from "@/utils";
 
-export async function getSaleList() {
-  const { data } = await supabase
-    .from("sale_list")
-    .select("*, san_type(name)")
-    .order("created_at", { ascending: false });
+export async function getSaleList(params?: { date?: Date }) {
+  let query = supabase.from("sale_list").select(`*, san_type(name)`);
+
+  if (params?.date) {
+    const [from, to] = getDayRange(params.date);
+    query = query.gte("created_at", from).lte("created_at", to);
+  }
+
+  const { data } = await query.order("created_at", { ascending: false });
 
   const total = data?.map((item) => item.amount).reduce((a, b) => a + b, 0);
 

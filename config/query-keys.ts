@@ -40,6 +40,13 @@ export const saleKeys = {
   },
 };
 
+export const saleTotalKeys = {
+  all: ["sale-total"],
+  list: (query?: object) => {
+    return ["sale-total", query];
+  },
+};
+
 export const remainingKeys = {
   all: ["remaining-list"],
   list: (query?: object) => {

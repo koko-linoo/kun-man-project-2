@@ -54,7 +54,10 @@ export function IconButton(props: TouchableOpacityProps) {
 
 const styles = StyleSheet.create({
   iconButton: {
-    paddingHorizontal: 16,
+    alignItems: "center",
+    flexDirection: "row",
+    gap: theme.spacing.xs,
+    paddingHorizontal: theme.spacing.xs,
   },
   buttonLabel: {
     fontFamily: "Font-Bold",
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 6,
-    borderRadius: theme.spacing.sm,
+    borderRadius: theme.spacing.xl,
     padding: 8,
     justifyContent: "center",
     alignItems: "center",
