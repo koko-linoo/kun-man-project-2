@@ -1,12 +1,12 @@
 import { List } from "@/components/Container";
 import { Text } from "@/components/Text";
 import { theme } from "@/config/theme";
-import { useGetTotalSale } from "@/quries/sale.query";
+import { useGetTotalPurchase } from "@/quries/purchase.query";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-export default function RemainingList() {
-  const { data, isPending } = useGetTotalSale();
+export default function PurchaseTotal() {
+  const { data, isPending } = useGetTotalPurchase();
 
   return (
     <View style={{ flex: 1, padding: theme.spacing.md, gap: theme.spacing.md }}>
@@ -19,11 +19,10 @@ export default function RemainingList() {
           borderBottomWidth: 1,
         }}
       >
-        <Text style={{ flex: 1, color: "white" }}>ဆန်အမျိုးအစား</Text>
-        <Text style={{ flex: 1, textAlign: "right", color: "white" }}>
-          ဆန်အိတ်
-        </Text>
-        <Text style={{ flex: 1, textAlign: "right", color: "white" }}>
+        <Text style={{ flex: 1, color: "white" }}>စပါး</Text>
+        <Text style={{ flex: 1, color: "white" }}>တင်း</Text>
+        <Text style={{ flex: 1, color: "white" }}>ပေါင်</Text>
+        <Text style={{ flex: 1, textAlign: "center", color: "white" }}>
           တန်ဖိုး
         </Text>
       </View>
@@ -40,7 +39,8 @@ export default function RemainingList() {
             }}
           >
             <Text style={{ flex: 1 }}>{item.name}</Text>
-            <Text style={{ flex: 1, textAlign: "right" }}>{item.count}</Text>
+            <Text style={{ flex: 1 }}>{item.tin}</Text>
+            <Text style={{ flex: 1 }}>{item.paung}</Text>
             <Text style={{ flex: 1, textAlign: "right" }}>
               {item.amount.toLocaleString()}
             </Text>

@@ -26,6 +26,13 @@ export const purchaseKeys = {
   },
 };
 
+export const purchaseTotalKeys = {
+  all: ["purchase-total"],
+  list: (query?: object) => {
+    return ["purchase-total", query];
+  },
+};
+
 export const millingKeys = {
   all: ["milling-list"],
   list: (query?: object) => {

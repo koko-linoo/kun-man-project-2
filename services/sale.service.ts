@@ -19,8 +19,16 @@ export async function getSaleList(params?: { date?: Date }) {
   };
 }
 
-export async function getTotalSale(): Promise<SaleTotal[]> {
+export async function getTotalSale(): Promise<{
+  data: SaleTotal[];
+  total: number;
+}> {
   let { data, error } = await supabase.rpc("gettotalsale");
+
+  const total =
+    data
+      ?.map((item: SaleTotal) => item.amount)
+      .reduce((a: number, b: number) => a + b, 0) || 0;
 
   if (error) {
     return Promise.reject({
@@ -28,7 +36,7 @@ export async function getTotalSale(): Promise<SaleTotal[]> {
     });
   }
 
-  return data;
+  return { data, total };
 }
 
 export async function createSale(sale: Record<string, any>) {

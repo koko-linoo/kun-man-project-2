@@ -1,6 +1,6 @@
-import { IconButton } from "@/components/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
+import { TouchableOpacity } from "react-native";
 
 export default function RootLayout() {
   return (
@@ -11,9 +11,12 @@ export default function RootLayout() {
           title: "အရောင်း စာရင်း",
           headerShown: true,
           headerRight: () => (
-            <IconButton onPress={() => router.push("/sale-total")}>
+            <TouchableOpacity
+              onPress={() => router.push("/sale-total")}
+              activeOpacity={0.6}
+            >
               <Ionicons name="list" size={24} />
-            </IconButton>
+            </TouchableOpacity>
           ),
         }}
       />

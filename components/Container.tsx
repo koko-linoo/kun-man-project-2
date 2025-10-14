@@ -97,9 +97,18 @@ export function BottomButtonList<T extends { id: number }>({
   header,
 }: ButtonListProps<T>) {
   return (
-    <View style={styles.content}>
-      {header}
-      <List items={items} child={child} isLoading={isLoading} />
+    <View style={[styles.scrollView]}>
+      <View
+        style={[
+          styles.content,
+          {
+            padding: theme.spacing.md,
+          },
+        ]}
+      >
+        {header}
+        <List items={items} child={child} isLoading={isLoading} />
+      </View>
       <View style={styles.bottom}>
         {extra}
         <Button2 label={label} onPress={onPress} disabled={disabled} />
@@ -116,7 +125,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    paddingHorizontal: theme.spacing.md,
   },
   container: {
     flex: 1,

@@ -14,6 +14,29 @@ export async function getPurchaseList() {
   };
 }
 
+export async function getTotalPurchase(): Promise<{
+  data: PurchaseTotal[];
+  total: number;
+}> {
+  let { data, error } = await supabase.rpc("gettotalpurchase");
+
+  const total =
+    data
+      ?.map((item: SaleTotal) => item.amount)
+      .reduce((a: number, b: number) => a + b, 0) || 0;
+
+  if (error) {
+    return Promise.reject({
+      message: "တစ်ခုခု မှားယွင်းနေပါသည်",
+    });
+  }
+
+  return {
+    data,
+    total,
+  };
+}
+
 export async function createPurchase(purchase: Record<string, any>) {
   if (!purchase.name) {
     return Promise.reject({

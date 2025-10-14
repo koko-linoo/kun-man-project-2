@@ -51,6 +51,14 @@ declare global {
     count: number;
   }
 
+  interface PurchaseTotal {
+    id: number;
+    name: string;
+    amount: number;
+    tin: number;
+    paung: number;
+  }
+
   interface Remaining {
     id: number;
     name: string;

@@ -1,15 +1,21 @@
 import { theme } from "@/config/theme";
 import { Ionicons } from "@expo/vector-icons";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "./Text";
 
 export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>();
   const [show, setShow] = useState(false);
 
-  const handleChange = (_: any, selectedDate?: Date) => {
+  const handleChange = (e: DateTimePickerEvent, selectedDate?: Date) => {
+    if (e.type === "dismissed") {
+      setShow(false);
+      return;
+    }
     setDate(selectedDate);
     onChange && onChange(selectedDate);
     setShow(false);
@@ -19,7 +25,6 @@ export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
     <View
       style={{
         alignItems: "flex-end",
-        marginTop: theme.spacing.md,
       }}
     >
       <View style={styles.row}>
@@ -29,11 +34,8 @@ export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
         >
           <Text style={styles.label}>
             {date?.toLocaleDateString("my-MM", {
-              localeMatcher: "best fit",
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            }) ?? "Filter By Date"}
+              dateStyle: "full",
+            }) ?? "ရက်စွဲရွေးရန်"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -66,7 +68,6 @@ export function DatePicker({ onChange }: { onChange?: (date?: Date) => void }) {
 
 const styles = StyleSheet.create({
   row: {
-    marginRight: theme.spacing.md,
     flexDirection: "row",
     alignItems: "center",
     gap: theme.spacing.xs,

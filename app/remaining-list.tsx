@@ -9,11 +9,9 @@ export default function RemainingList() {
   const { data, isPending } = useRemainingList();
 
   return (
-    <>
+    <View style={{ flex: 1, padding: theme.spacing.md, gap: theme.spacing.md }}>
       <View
         style={{
-          marginTop: theme.spacing.md,
-          marginHorizontal: theme.spacing.md,
           padding: theme.spacing.md,
           backgroundColor: theme.colors.primary,
           flexDirection: "row",
@@ -21,14 +19,16 @@ export default function RemainingList() {
           borderBottomWidth: 1,
         }}
       >
-        <Text style={{ flex: 1, color: "white" }}>ဆန်အမျိုးအစား</Text>
-        <Text style={{ flex: 1, textAlign: "right", color: "white" }}>
+        <Text style={{ flex: 1, textAlign: "center", color: "white" }}>
+          ဆန်အမျိုးအစား
+        </Text>
+        <Text style={{ flex: 1, textAlign: "center", color: "white" }}>
           ဆန်ကြိတ်
         </Text>
-        <Text style={{ flex: 1, textAlign: "right", color: "white" }}>
+        <Text style={{ flex: 1, textAlign: "center", color: "white" }}>
           အရောင်း
         </Text>
-        <Text style={{ flex: 1, textAlign: "right", color: "white" }}>
+        <Text style={{ flex: 1, textAlign: "center", color: "white" }}>
           လက်ကျန်
         </Text>
       </View>
@@ -54,6 +54,6 @@ export default function RemainingList() {
         )}
         isLoading={isPending}
       />
-    </>
+    </View>
   );
 }

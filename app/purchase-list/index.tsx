@@ -1,7 +1,10 @@
 import { BottomButtonList } from "@/components/Container";
 import { ListItem } from "@/components/ListItem";
+import { Text } from "@/components/Text";
+import { theme } from "@/config/theme";
 import { useDeletePurchase, usePurchaseList } from "@/quries/purchase.query";
 import { router } from "expo-router";
+import { StyleSheet, View } from "react-native";
 
 function Item({ data }: { data: Purchase }) {
   const { mutate, isPending } = useDeletePurchase();
@@ -32,6 +35,26 @@ export default function PurchaseList() {
       isLoading={isLoading}
       label="အဝယ်စာရင်း အသစ်ထည့်ရန်"
       onPress={() => router.push("/purchase-list/add-new")}
+      extra={
+        <View style={styles.row}>
+          <Text>စုစုပေါင်း</Text>
+          <Text style={styles.total}>
+            {data?.total?.toLocaleString() || 0} ကျပ်
+          </Text>
+        </View>
+      }
     />
   );
 }
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: theme.spacing.md,
+  },
+  total: {
+    fontSize: theme.fontSizes.lg,
+    fontFamily: "Font-Bold",
+  },
+});

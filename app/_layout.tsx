@@ -47,6 +47,10 @@ export default function RootLayout() {
             name="sale-total"
             options={{ headerShown: true, title: "ရောင်းအားစုစုပေါင်း" }}
           />
+          <Stack.Screen
+            name="purchase-total"
+            options={{ headerShown: true, title: "ဝယ်ယူမှုစုစုပေါင်း" }}
+          />
         </Stack>
         <StatusBar style="auto" />
         <Toast />
