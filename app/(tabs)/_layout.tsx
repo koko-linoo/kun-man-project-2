@@ -11,11 +11,6 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: theme.colors.primary,
         tabBarStyle: { backgroundColor: "white", height: 70 },
-        headerRight: () => (
-          <IconButton onPress={() => router.push("/settings")}>
-            <Ionicons name="settings" size={24} />
-          </IconButton>
-        ),
       }}
     >
       <Tabs.Screen
@@ -25,12 +20,17 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={16} color={color} />
           ),
+          headerRight: () => (
+            <IconButton onPress={() => router.push("/settings")}>
+              <Ionicons name="settings" size={24} />
+            </IconButton>
+          ),
         }}
       />
       <Tabs.Screen
-        name="history"
+        name="other"
         options={{
-          title: "History",
+          title: "Other",
           tabBarIcon: ({ color }) => (
             <Ionicons name="time" size={16} color={color} />
           ),

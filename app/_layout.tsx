@@ -13,7 +13,7 @@ const queryClient = new QueryClient({
 });
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
+  useFonts({
     "Font-Regular": require("../assets/fonts/Padauk-Regular.ttf"),
     "Font-Bold": require("../assets/fonts/Padauk-Bold.ttf"),
   });
@@ -39,6 +39,10 @@ export default function RootLayout() {
           <Stack.Screen name="sapa-list" options={{ headerShown: false }} />
           <Stack.Screen name="san-list" options={{ headerShown: false }} />
           <Stack.Screen name="sale-list" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="other-milling-list"
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="sale-total"
             options={{ headerShown: true, title: "ရောင်းအားစုစုပေါင်း" }}
