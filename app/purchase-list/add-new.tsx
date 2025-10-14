@@ -42,12 +42,14 @@ export default function AddNew() {
             style={styles.input}
             placeholder="000, 000"
             label="တင်း"
+            keyboardType="numeric"
             value={tin}
             onChange={(e) => setTin(e)}
           />
           <Input
             style={styles.input}
             placeholder="000, 000"
+            keyboardType="numeric"
             label="ပေါင်"
             value={paung}
             onChange={(e) => setPaung(e)}
@@ -56,6 +58,7 @@ export default function AddNew() {
         <Input
           label="တန်ဖိုး"
           placeholder="000, 000"
+          keyboardType="numeric"
           value={amount}
           onChange={(e) => setAmount(e)}
         />

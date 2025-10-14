@@ -66,4 +66,13 @@ declare global {
     sale: number;
     remaining: number;
   }
+
+  interface OtherMilling {
+    id: number;
+    san_type: San;
+    san_count: number;
+    san_kwal_count: number;
+    amount: number;
+    created_at: string;
+  }
 }

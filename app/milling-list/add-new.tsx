@@ -42,6 +42,7 @@ export default function AddNew() {
         <Input
           style={styles.input}
           placeholder="000, 000"
+          keyboardType="numeric"
           label="အိတ်"
           value={count}
           onChange={(e) => setCount(e)}
@@ -57,6 +58,7 @@ export default function AddNew() {
         <Input
           style={styles.input}
           placeholder="000, 000"
+          keyboardType="numeric"
           label="အိတ်"
           value={extra}
           onChange={(e) => setExtra(e)}
@@ -72,6 +74,7 @@ export default function AddNew() {
         <Input
           style={styles.input}
           placeholder="000, 000"
+          keyboardType="numeric"
           label="အိတ်"
           value={half}
           onChange={(e) => setHalf(e)}
@@ -87,6 +90,7 @@ export default function AddNew() {
         <Input
           style={styles.input}
           placeholder="000, 000"
+          keyboardType="numeric"
           label="အိတ်"
           value={twoThreeFour}
           onChange={(e) => setTwoThreeFour(e)}
@@ -102,6 +106,7 @@ export default function AddNew() {
         <Input
           style={styles.input}
           placeholder="000, 000"
+          keyboardType="numeric"
           label="အိတ်"
           value={flowerNu}
           onChange={(e) => setFlowerNu(e)}

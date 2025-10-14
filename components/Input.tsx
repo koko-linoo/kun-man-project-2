@@ -1,5 +1,6 @@
 import { theme } from "@/config/theme";
 import {
+  KeyboardType,
   StyleProp,
   StyleSheet,
   Text,
@@ -14,6 +15,7 @@ type InputProps = {
   label: string;
   placeholder?: string;
   value?: string;
+  keyboardType?: KeyboardType;
   onChange?: (value: string | undefined) => void;
 };
 
@@ -22,6 +24,7 @@ export function Input(props: InputProps) {
     <View style={[styles.root, props.style]}>
       <Text>{props.label}</Text>
       <TextInput
+        keyboardType={props.keyboardType}
         readOnly={props.readonly}
         placeholderTextColor="#aaa"
         value={props.value}

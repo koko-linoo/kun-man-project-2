@@ -6,11 +6,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 const buttons = [
-  {
-    label: "ပေါင်းခံ စာရင်း",
-    route: "/distillation-list",
-    icon: "bonfire",
-  },
+  // {
+  //   label: "ပေါင်းခံ စာရင်း",
+  //   route: "/distillation-list",
+  //   icon: "bonfire",
+  // },
   {
     label: "ဆန်ကြိတ် စာရင်း",
     route: "/other-milling-list",

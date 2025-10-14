@@ -40,11 +40,13 @@ export default function AddNew() {
         <Input
           placeholder="000, 000"
           label="အိတ် အရေအတွက်"
+          keyboardType="numeric"
           value={count}
           onChange={(e) => setCount(e)}
         />
         <Input
           label="တန်ဖိုး"
+          keyboardType="numeric"
           placeholder="000, 000"
           value={amount}
           onChange={(e) => setAmount(e)}

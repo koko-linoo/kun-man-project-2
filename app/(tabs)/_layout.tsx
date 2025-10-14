@@ -30,7 +30,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="other"
         options={{
-          title: "Other",
+          title: "အခြားစာရင်းများ",
           tabBarIcon: ({ color }) => (
             <Ionicons name="time" size={16} color={color} />
           ),
