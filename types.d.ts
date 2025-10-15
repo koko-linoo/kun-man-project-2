@@ -75,4 +75,12 @@ declare global {
     amount: number;
     created_at: string;
   }
+
+  interface Distillation {
+    id: number;
+    sapa_type: Sapa;
+    count: number;
+    amount: number;
+    created_at: string;
+  }
 }

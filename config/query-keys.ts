@@ -40,6 +40,13 @@ export const millingKeys = {
   },
 };
 
+export const distillationKeys = {
+  all: ["distillationKeys"],
+  list: (query?: object) => {
+    return ["distillationKeys", query];
+  },
+};
+
 export const otherMillingKeys = {
   all: ["other-milling-list"],
   list: (query?: object) => {

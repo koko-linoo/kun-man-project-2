@@ -38,6 +38,7 @@ export default function Settings() {
     </ScrollView>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     flex: 1,

@@ -40,6 +40,10 @@ export default function RootLayout() {
           <Stack.Screen name="san-list" options={{ headerShown: false }} />
           <Stack.Screen name="sale-list" options={{ headerShown: false }} />
           <Stack.Screen
+            name="distillation-list"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="other-milling-list"
             options={{ headerShown: false }}
           />
