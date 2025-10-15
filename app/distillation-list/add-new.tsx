@@ -31,7 +31,6 @@ export default function AddNew() {
           onChange={(e) => setSapa({ id: Number(e.id), name: e.name })}
         />
         <Input
-          style={styles.input}
           placeholder="000, 000"
           keyboardType="numeric"
           label="တင်းရေ"
@@ -39,7 +38,6 @@ export default function AddNew() {
           onChange={(e) => setCount(e)}
         />
         <Input
-          style={styles.input}
           placeholder="000, 000"
           keyboardType="numeric"
           label="ကြိတ်ခ"
@@ -56,12 +54,5 @@ const styles = StyleSheet.create({
     gap: theme.spacing.md,
     paddingHorizontal: theme.spacing.md,
     paddingTop: theme.spacing.md,
-  },
-  input: {
-    flex: 1,
-  },
-  row: {
-    flexDirection: "row",
-    gap: theme.spacing.md,
   },
 });
